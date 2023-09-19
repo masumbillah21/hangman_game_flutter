@@ -34,7 +34,7 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ),
           actions: <Widget>[
-            TextButton(
+            ElevatedButton(
               child: const Text('Start Again'),
               onPressed: () {
                 setState(() {
@@ -58,86 +58,100 @@ class _GameScreenState extends State<GameScreen> {
       appBar: AppBar(
         title: const Text('Hangman: The Game'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: Image.asset("images/$tries.png"),
-                ),
-                Expanded(
-                  child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: word
-                            .split("")
-                            .map((e) => HiddenLetter(
-                                e, !selectedChar.contains(e.toUpperCase())))
-                            .toList(),
-                      )),
-                ),
-              ],
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            colors: [
+              Colors.blueAccent,
+              Colors.deepPurpleAccent,
+            ],
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.count(
-                crossAxisCount: 7,
-                mainAxisSpacing: 4,
-                crossAxisSpacing: 4,
-                children: characters
-                    .split("")
-                    .map(
-                      (e) => ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black54,
-                        ),
-                        onPressed: selectedChar.contains(e.toUpperCase())
-                            ? null
-                            : () {
-                                setState(() {
-                                  selectedChar.add(e.toUpperCase());
-                                  if (!word
-                                      .split("")
-                                      .contains(e.toUpperCase())) {
-                                    tries++;
-                                  } else {
-                                    correctChar.add(e.toUpperCase());
-                                  }
-                                });
-
-                                print(actualWord.length);
-                                print(actualWord);
-                                print(correctChar.length);
-                                print(correctChar);
-
-                                if (actualWord.length == correctChar.length) {
-                                  _showMyDialog("Congratulation",
-                                      "Congratulation You Have Done It!");
-                                } else if (tries >= 6) {
-                                  _showMyDialog(
-                                      "Gave Over", "Sorry to see you hanging!");
-                                }
-                              },
-                        child: Text(
-                          e,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: Image.asset(
+                      "images/$tries.png",
+                      scale: 4,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: word
+                              .split("")
+                              .map((e) => HiddenLetter(
+                                  e, !selectedChar.contains(e.toUpperCase())))
+                              .toList(),
+                        )),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.count(
+                  crossAxisCount: 7,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
+                  children: characters
+                      .split("")
+                      .map(
+                        (e) => ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black54,
+                          ),
+                          onPressed: selectedChar.contains(e.toUpperCase())
+                              ? null
+                              : () {
+                                  setState(() {
+                                    selectedChar.add(e.toUpperCase());
+                                    if (!word
+                                        .split("")
+                                        .contains(e.toUpperCase())) {
+                                      tries++;
+                                    } else {
+                                      correctChar.add(e.toUpperCase());
+                                    }
+                                  });
+
+                                  print(actualWord.length);
+                                  print(actualWord);
+                                  print(correctChar.length);
+                                  print(correctChar);
+
+                                  if (actualWord.length == correctChar.length) {
+                                    _showMyDialog("Congratulation",
+                                        "Congratulation You Have Done It!");
+                                  } else if (tries >= 6) {
+                                    _showMyDialog("Gave Over",
+                                        "Sorry to see you hanging!");
+                                  }
+                                },
+                          child: Text(
+                            e,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hangman: The Game',
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.deepPurpleAccent,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.deepPurpleAccent,
+        )),
+      ),
       home: const GameScreen(),
     );
   }
