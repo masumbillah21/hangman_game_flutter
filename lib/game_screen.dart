@@ -6,16 +6,17 @@ import 'package:hangman/utilities/hidden_latters.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
-
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
   var characters = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
+
   String word = AppWords.wordList[Random().nextInt(5)].toUpperCase();
   List<String> selectedChar = [];
   List<String> correctChar = [];
+
   int tries = 0;
 
   Future<void> _showMyDialog(String title, String message) async {
@@ -52,6 +53,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Set<String> actualWord = word.split("").toSet();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Hangman: The Game'),
@@ -109,10 +111,12 @@ class _GameScreenState extends State<GameScreen> {
                                   }
                                 });
 
-                                print(word.length);
+                                print(actualWord.length);
+                                print(actualWord);
                                 print(correctChar.length);
+                                print(correctChar);
 
-                                if (word.length == correctChar.length) {
+                                if (actualWord.length == correctChar.length) {
                                   _showMyDialog("Congratulation",
                                       "Congratulation You Have Done It!");
                                 } else if (tries >= 6) {
