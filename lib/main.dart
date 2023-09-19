@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hangman: The Game',
       theme: ThemeData.dark(),
-      home: const MyHomePage(),
+      home: const GameScreen(),
     );
   }
 }

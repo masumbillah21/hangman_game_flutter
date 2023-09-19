@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:hangman/utilities/app_utilities.dart';
 import 'package:hangman/utilities/hidden_latters.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class GameScreen extends StatefulWidget {
+  const GameScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<GameScreen> createState() => _GameScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _GameScreenState extends State<GameScreen> {
   var characters = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
   String word = AppWords.wordList[Random().nextInt(5)].toUpperCase();
   List<String> selectedChar = [];
@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hangman'),
+        title: const Text('Hangman: The Game'),
       ),
       body: Column(
         children: [
